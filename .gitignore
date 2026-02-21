@@ -1,0 +1,4 @@
+*
+!.gitignore
+!config.template.yaml
+!README.md
