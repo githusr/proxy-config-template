@@ -227,6 +227,13 @@ proxy-groups:
       - 其余节点
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png"
 
+  - name: 特殊地址
+    type: select
+    proxies:
+      - PASS
+    include-all: true
+    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Lab.png"
+
   - name: 漏网之鱼
     type: select
     proxies:
@@ -287,6 +294,11 @@ rule-anchor:
     proxy: 节点选择
 
 rule-providers:
+  special_address:
+    <<: *classical
+    path: ./rule_providers/special_address.list
+    url: "__SPECIAL_ADDRESS_URL__"
+
   custom_direct:
     <<: *classical
     path: ./rule_providers/custom_direct.list
@@ -377,6 +389,7 @@ rule-providers:
 
 rules:
   - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((OR,((RULE-SET,cn_domain),(RULE-SET,cn_ip,no-resolve),(RULE-SET,private_domain),(RULE-SET,private_ip,no-resolve),(RULE-SET,custom_direct,no-resolve)))))),QUIC
+  - RULE-SET,special_address,特殊地址,no-resolve
   - RULE-SET,custom_direct,DIRECT,no-resolve
   - RULE-SET,custom_proxy,节点选择,no-resolve
   - RULE-SET,ads_domain,广告拦截
