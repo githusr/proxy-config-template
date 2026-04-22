@@ -76,8 +76,15 @@ dns:
   listen: 0.0.0.0:1053
   enhanced-mode: fake-ip
   fake-ip-range: 28.0.0.1/8
+  fake-ip-filter-mode: rule
   fake-ip-filter:
-    - "rule-set:private_domain,fcm_domain,cn_domain,custom_direct"
+    - RULE-SET,custom_direct,real-ip
+    - RULE-SET,custom_proxy,fake-ip
+    - RULE-SET,private_domain,real-ip
+    - RULE-SET,fcm_domain,real-ip
+    - RULE-SET,geolocation_not_cn,fake-ip
+    - RULE-SET,cn_domain,real-ip
+    - MATCH,fake-ip
   proxy-server-nameserver: &direct_dns
     - https://dns.alidns.com/dns-query#DIRECT&h3=true
     - https://doh.pub/dns-query#DIRECT&h3=false
