@@ -1,9 +1,6 @@
 p: &p
   type: http
-  health-check:
-    enable: true
-    url: https://www.gstatic.com/generate_204
-    interval: 1800
+  health-check: { enable: true, url: https://www.gstatic.com/generate_204, interval: 1800 }
   proxy: 订阅更新
 
 proxy-providers:
@@ -97,15 +94,7 @@ dns:
 proxy-groups:
   - name: 节点选择
     type: select
-    proxies:
-      - 美国节点
-      - 日本节点
-      - 狮城节点
-      - 台湾节点
-      - 香港节点
-      - 其余节点
-      - REJECT
-      - DIRECT
+    proxies: [美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, REJECT, DIRECT]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Rocket.png"
 
   - name: 美国节点
@@ -116,138 +105,68 @@ proxy-groups:
 
   - name: 特殊地址
     type: select
-    proxies:
-      - PASS
-      - DIRECT
-      - REJECT
+    proxies: [PASS, DIRECT, REJECT]
     include-all: true
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Lab.png"
 
   - name: 订阅更新
     type: select
-    proxies:
-      - 节点选择
-      - DIRECT
+    proxies: [节点选择, DIRECT]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Round_Robin.png"
 
   - name: 广告拦截
     type: select
-    proxies:
-      - REJECT
-      - PASS
-      - REJECT-DROP
+    proxies: [REJECT, PASS, REJECT-DROP]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Advertising.png"
 
   - name: QUIC
     type: select
-    proxies:
-      - REJECT
-      - PASS
-      - REJECT-DROP
+    proxies: [REJECT, PASS, REJECT-DROP]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ForeignMedia.png"
 
   - name: PORN
     type: select
-    proxies:
-      - 日本节点
-      - 台湾节点
-      - 香港节点
-      - 狮城节点
-      - 美国节点
-      - 其余节点
-      - DIRECT
+    proxies: [日本节点, 台湾节点, 香港节点, 狮城节点, 美国节点, 其余节点, DIRECT]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Pornhub.png"
 
   - name: TikTok
     type: select
-    proxies:
-      - 节点选择
-      - 美国节点
-      - 日本节点
-      - 狮城节点
-      - 台湾节点
-      - 香港节点
-      - 其余节点
-      - DIRECT
+    proxies: [节点选择, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, DIRECT]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png"
 
   - name: Google
     type: select
-    proxies:
-      - 节点选择
-      - 美国节点
-      - 日本节点
-      - 狮城节点
-      - 台湾节点
-      - 香港节点
-      - 其余节点
-      - DIRECT
+    proxies: [节点选择, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, DIRECT]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png"
 
   - name: 谷歌FCM
     type: select
-    proxies:
-      - DIRECT
-      - 节点选择
+    proxies: [DIRECT, 节点选择]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Mail.png"
 
   - name: 哔哩哔哩
     type: select
-    proxies:
-      - DIRECT
-      - 台湾节点
-      - 香港节点
+    proxies: [DIRECT, 台湾节点, 香港节点]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/bilibili.png"
 
   - name: 游戏平台
     type: select
-    proxies:
-      - DIRECT
-      - 美国节点
-      - 日本节点
-      - 狮城节点
-      - 台湾节点
-      - 香港节点
-      - 其余节点
+    proxies: [DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png"
 
   - name: 微软服务
     type: select
-    proxies:
-      - 节点选择
-      - DIRECT
-      - 美国节点
-      - 日本节点
-      - 狮城节点
-      - 台湾节点
-      - 香港节点
-      - 其余节点
+    proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Microsoft.png"
 
   - name: 苹果服务
     type: select
-    proxies:
-      - 节点选择
-      - DIRECT
-      - 美国节点
-      - 日本节点
-      - 狮城节点
-      - 台湾节点
-      - 香港节点
-      - 其余节点
+    proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png"
 
   - name: 漏网之鱼
     type: select
-    proxies:
-      - 节点选择
-      - DIRECT
-      - 美国节点
-      - 日本节点
-      - 狮城节点
-      - 台湾节点
-      - 香港节点
-      - 其余节点
+    proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Final.png"
 
   - name: 日本节点
@@ -307,26 +226,9 @@ proxy-groups:
       - 其余节点
 
 rule-anchor:
-  classical: &classical
-    type: http
-    behavior: classical
-    format: text
-    interval: 86400
-    proxy: 节点选择
-
-  ip: &ip
-    type: http
-    behavior: ipcidr
-    format: mrs
-    interval: 86400
-    proxy: 节点选择
-
-  domain: &domain
-    type: http
-    behavior: domain
-    format: mrs
-    interval: 86400
-    proxy: 节点选择
+  classical: &classical { type: http, behavior: classical, format: text, interval: 86400, proxy: 节点选择 }
+  ip: &ip { type: http, behavior: ipcidr, format: mrs, interval: 86400, proxy: 节点选择 }
+  domain: &domain { type: http, behavior: domain, format: mrs, interval: 86400, proxy: 节点选择 }
 
 rule-providers:
   special_address:
