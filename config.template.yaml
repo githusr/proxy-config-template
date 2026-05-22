@@ -25,7 +25,7 @@ find-process-mode: off
 
 external-controller: 0.0.0.0:9090
 external-ui: WebUI
-external-ui-url: "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip"
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
 secret: "__YOUR_SECRET__"
 
 profile:
@@ -82,9 +82,14 @@ dns:
     - RULE-SET,geolocation_not_cn,fake-ip
     - RULE-SET,cn_domain,real-ip
     - MATCH,fake-ip
+  default-nameserver:
+    - quic://223.5.5.5
+    - https://223.6.6.6/dns-query
+    # - 119.29.29.29
   proxy-server-nameserver: &direct_dns
-    - https://dns.alidns.com/dns-query#DIRECT&h3=true
-    - https://doh.pub/dns-query#DIRECT&h3=false
+    - https://dns.alidns.com/dns-query#h3=true
+    - https://doh.pub/dns-query
+  proxy-server-nameserver-policy:
   nameserver-policy:
     "rule-set:private_domain,fcm_domain,cn_domain,custom_direct": *direct_dns
   nameserver:
@@ -95,109 +100,109 @@ proxy-groups:
   - name: 节点选择
     type: select
     proxies: [美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, REJECT, DIRECT]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Rocket.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Rocket.png
 
   - name: 美国节点
     type: select
     include-all-providers: true
     filter: "(?i)(🇺🇸|美国)"
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png
 
   - name: 特殊地址
     type: select
     proxies: [PASS, DIRECT, REJECT]
     include-all: true
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Lab.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Lab.png
 
   - name: 订阅更新
     type: select
     proxies: [节点选择, DIRECT]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Round_Robin.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Round_Robin.png
 
   - name: 广告拦截
     type: select
     proxies: [REJECT, PASS, REJECT-DROP]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Advertising.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Advertising.png
 
   - name: QUIC
     type: select
     proxies: [REJECT, PASS, REJECT-DROP]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ForeignMedia.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ForeignMedia.png
 
   - name: PORN
     type: select
     proxies: [日本节点, 台湾节点, 香港节点, 狮城节点, 美国节点, 其余节点, DIRECT]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Pornhub.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Pornhub.png
 
   - name: TikTok
     type: select
     proxies: [节点选择, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, DIRECT]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
 
   - name: Google
     type: select
     proxies: [节点选择, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, DIRECT]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png
 
   - name: 谷歌FCM
     type: select
     proxies: [DIRECT, 节点选择]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Mail.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Mail.png
 
   - name: 哔哩哔哩
     type: select
     proxies: [DIRECT, 台湾节点, 香港节点]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/bilibili.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/bilibili.png
 
   - name: 游戏平台
     type: select
     proxies: [DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png
 
   - name: 微软服务
     type: select
     proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Microsoft.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Microsoft.png
 
   - name: 苹果服务
     type: select
     proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png
 
   - name: 漏网之鱼
     type: select
     proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Final.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Final.png
 
   - name: 日本节点
     type: select
     include-all-providers: true
     filter: "(?i)(🇯🇵|日本)"
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png
 
   - name: 狮城节点
     type: select
     include-all-providers: true
     filter: "(?i)(🇸🇬|新加坡)"
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png
 
   - name: 台湾节点
     type: select
     include-all-providers: true
     filter: "(?i)(🇹🇼|🇨🇳|台湾)"
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png
 
   - name: 香港节点
     type: select
     include-all-providers: true
     filter: "(?i)(🇭🇰|香港)"
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png
 
   - name: 其余节点
     type: select
     include-all-providers: true
     filter: "(?i)^(?!.*(?:🇺🇸|🇯🇵|🇸🇬|🇹🇼|🇨🇳|🇭🇰|美国|日本|新加坡|台湾|香港)).*"
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png"
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png
 
   - name: GLOBAL
     type: select
@@ -254,81 +259,81 @@ rule-providers:
   ads_domain:
     <<: *domain
     path: ./rule_providers/ads_domain.mrs
-    url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs"
+    url: https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs
 
   private_domain:
     <<: *domain
     path: ./rule_providers/private_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
   private_ip:
     <<: *ip
     path: ./rule_providers/private_ip.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs
 
   bilibili_domain:
     <<: *domain
     path: ./rule_providers/bilibili_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs
   bilibili_ip:
     <<: *ip
     path: ./rule_providers/bilibili_ip.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/bilibili.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/bilibili.mrs
 
   tiktok_domain:
     <<: *domain
     path: ./rule_providers/tiktok_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
 
   steam_domain:
     <<: *domain
     path: ./rule_providers/steam_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs
 
   fcm_domain:
     <<: *domain
     path: ./rule_providers/fcm_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.mrs
 
   google_domain:
     <<: *domain
     path: ./rule_providers/google_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
   google_ip:
     <<: *ip
     path: ./rule_providers/google_ip.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs
 
   microsoft_domain:
     <<: *domain
     path: ./rule_providers/microsoft_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs
 
   apple_domain:
     <<: *domain
     path: ./rule_providers/apple_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs
   apple_ip:
     <<: *ip
     path: ./rule_providers/apple_ip.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs
 
   porn_domain:
     <<: *domain
     path: ./rule_providers/porn_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-porn.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-porn.mrs
 
   geolocation_not_cn:
     <<: *domain
     path: ./rule_providers/geolocation_not_cn.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs
   cn_domain:
     <<: *domain
     path: ./rule_providers/cn_domain.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
   cn_ip:
     <<: *ip
     path: ./rule_providers/cn_ip.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
 
 rules:
   - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((OR,((RULE-SET,cn_domain),(RULE-SET,cn_ip,no-resolve),(RULE-SET,private_domain),(RULE-SET,private_ip,no-resolve),(RULE-SET,custom_direct,no-resolve)))))),QUIC
