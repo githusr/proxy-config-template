@@ -226,7 +226,13 @@ proxy-groups:
       - 其余节点
 
 rule-anchor:
-  classical: &classical { type: http, behavior: classical, format: text, interval: 86400, proxy: 节点选择 }
+  classical: &classical
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    proxy: 节点选择
+    # header: { Authorization: ["__AUTHORIZATION__"] }
   ip: &ip { type: http, behavior: ipcidr, format: mrs, interval: 86400, proxy: 节点选择 }
   domain: &domain { type: http, behavior: domain, format: mrs, interval: 86400, proxy: 节点选择 }
 
