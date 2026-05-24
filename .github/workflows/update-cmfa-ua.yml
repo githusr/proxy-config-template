@@ -1,0 +1,76 @@
+name: Update CMFA UA
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Optional CMFA version, such as 2.11.28 or v2.11.28"
+        required: false
+        type: string
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-cmfa-ua
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Resolve latest CMFA UA
+        id: cmfa
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_VERSION: ${{ github.event.inputs.version || '' }}
+        run: |
+          set -euo pipefail
+
+          if [ -n "$INPUT_VERSION" ]; then
+            version="${INPUT_VERSION#v}"
+          else
+            tag="$(gh release view --repo MetaCubeX/ClashMetaForAndroid --json tagName --jq .tagName)"
+            version="${tag#v}"
+          fi
+          version="${version%.Meta}"
+          version="${version%.Alpha}"
+
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Unexpected CMFA version: $version" >&2
+            exit 1
+          fi
+
+          echo "ua=ClashMetaForAndroid/${version}.Meta" >> "$GITHUB_OUTPUT"
+
+      - name: Update config template
+        run: |
+          set -euo pipefail
+
+          ua="${{ steps.cmfa.outputs.ua }}"
+          if ! grep -qE 'ClashMetaForAndroid/[0-9A-Za-z._-]+' config.template.yaml; then
+            echo "No existing CMFA UA found in config.template.yaml" >&2
+            exit 1
+          fi
+
+          sed -i -E "s#ClashMetaForAndroid/[0-9A-Za-z._-]+#$ua#g" config.template.yaml
+
+      - name: Commit changes
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet -- config.template.yaml; then
+            echo "CMFA UA is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config.template.yaml
+          git commit -m "chore: update CMFA UA"
+          git push

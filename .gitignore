@@ -3,3 +3,6 @@
 !config.template.yaml
 !README.md
 !.prettierrc
+!.github/
+!.github/workflows/
+!.github/workflows/update-cmfa-ua.yml
