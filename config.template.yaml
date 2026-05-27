@@ -78,6 +78,7 @@ dns:
   fake-ip-filter:
     - RULE-SET,custom_direct,real-ip
     - RULE-SET,custom_proxy,fake-ip
+    - RULE-SET,ads_domain,fake-ip
     - RULE-SET,private_domain,real-ip
     - RULE-SET,fcm_domain,real-ip
     - RULE-SET,geolocation_not_cn,fake-ip
