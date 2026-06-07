@@ -2,7 +2,7 @@ p: &p
   type: http
   health-check: { enable: true, url: https://www.gstatic.com/generate_204, interval: 1800 }
   proxy: 订阅更新
-  header: { User-Agent: ["ClashMetaForAndroid/2.11.29.Meta"] }
+  header: { User-Agent: ["ClashMetaForAndroid/2.11.30.Meta"] }
 
 proxy-providers:
   __PROVIDER_NAME__:
