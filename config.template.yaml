@@ -13,6 +13,8 @@ proxy-providers:
 
   __ONE_TIME_PROVIDER_NAME__:
     <<: *p
+    override:
+      additional-suffix: ""
     path: ./proxy_providers/2.yaml
     url: "__ONE_TIME_PROVIDER_URL__"
 

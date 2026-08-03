@@ -2,7 +2,7 @@
 
 Copy `config.template.yaml` to `config.yaml` and modify the following places:
 
-1. **`proxy-providers`**: Your subscription URLs and provider names
+1. **`proxy-providers`**: Your subscription URLs and provider names, with `additional-suffix` if needed to distinguish same-named proxies across providers
 2. **`__YOUR_SECRET__`**: Your API secret for external controller
 3. **`proxy-server-nameserver-policy`**: Provider-specific DNS for resolving proxy nodes (optional)
 4. **`rule-providers`**: Custom rule URLs (optional, with Authorization header if needed)
