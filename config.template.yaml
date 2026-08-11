@@ -1,7 +1,7 @@
 p: &p
   type: http
   health-check: { enable: true, url: https://www.gstatic.com/generate_204, interval: 1800 }
-  proxy: 订阅更新
+  proxy: Update
   header: { User-Agent: ["ClashMetaForAndroid/2.11.32.Meta"] }
 
 proxy-providers:
@@ -97,33 +97,33 @@ dns:
   nameserver-policy:
     "rule-set:private_domain,fcm_domain,cn_domain,custom_direct": *direct_dns
   nameserver:
-    - https://cloudflare-dns.com/dns-query#节点选择
-    - https://dns.google/dns-query#节点选择
+    - https://cloudflare-dns.com/dns-query#Proxy
+    - https://dns.google/dns-query#Proxy
 
 proxy-groups:
-  - name: 节点选择
+  - name: Proxy
     type: select
-    proxies: [美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, REJECT, DIRECT]
+    proxies: [US, Japan, Singapore, Taiwan, Hong Kong, Other, REJECT, DIRECT]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Rocket.png
 
-  - name: 美国节点
+  - name: US
     type: select
     include-all-providers: true
     filter: "(?i)(🇺🇸|美国)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png
 
-  - name: 特殊地址
+  - name: Special
     type: select
     proxies: [PASS, DIRECT, REJECT]
     include-all: true
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Lab.png
 
-  - name: 订阅更新
+  - name: Update
     type: select
-    proxies: [节点选择, DIRECT]
+    proxies: [Proxy, DIRECT]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Round_Robin.png
 
-  - name: 广告拦截
+  - name: Ads
     type: select
     proxies: [REJECT, PASS, REJECT-DROP]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Advertising.png
@@ -133,76 +133,76 @@ proxy-groups:
     proxies: [REJECT, PASS, REJECT-DROP]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ForeignMedia.png
 
-  - name: PORN
+  - name: Porn
     type: select
-    proxies: [日本节点, 台湾节点, 香港节点, 狮城节点, 美国节点, 其余节点, DIRECT]
+    proxies: [Japan, Taiwan, Hong Kong, Singapore, US, Other, DIRECT]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Pornhub.png
 
   - name: TikTok
     type: select
-    proxies: [节点选择, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, DIRECT]
+    proxies: [Proxy, US, Japan, Singapore, Taiwan, Hong Kong, Other, DIRECT]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
 
   - name: Google
     type: select
-    proxies: [节点选择, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点, DIRECT]
+    proxies: [Proxy, US, Japan, Singapore, Taiwan, Hong Kong, Other, DIRECT]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png
 
-  - name: 谷歌FCM
+  - name: FCM
     type: select
-    proxies: [DIRECT, 节点选择]
+    proxies: [DIRECT, Proxy]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Mail.png
 
-  - name: 哔哩哔哩
+  - name: Bilibili
     type: select
-    proxies: [DIRECT, 台湾节点, 香港节点]
+    proxies: [DIRECT, Taiwan, Hong Kong]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/bilibili.png
 
-  - name: 游戏平台
+  - name: Steam
     type: select
-    proxies: [DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
+    proxies: [DIRECT, US, Japan, Singapore, Taiwan, Hong Kong, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png
 
-  - name: 微软服务
+  - name: Microsoft
     type: select
-    proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
+    proxies: [Proxy, DIRECT, US, Japan, Singapore, Taiwan, Hong Kong, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Microsoft.png
 
-  - name: 苹果服务
+  - name: Apple
     type: select
-    proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
+    proxies: [Proxy, DIRECT, US, Japan, Singapore, Taiwan, Hong Kong, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png
 
-  - name: 漏网之鱼
+  - name: Final
     type: select
-    proxies: [节点选择, DIRECT, 美国节点, 日本节点, 狮城节点, 台湾节点, 香港节点, 其余节点]
+    proxies: [Proxy, DIRECT, US, Japan, Singapore, Taiwan, Hong Kong, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Final.png
 
-  - name: 日本节点
+  - name: Japan
     type: select
     include-all-providers: true
     filter: "(?i)(🇯🇵|日本)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png
 
-  - name: 狮城节点
+  - name: Singapore
     type: select
     include-all-providers: true
     filter: "(?i)(🇸🇬|新加坡)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png
 
-  - name: 台湾节点
+  - name: Taiwan
     type: select
     include-all-providers: true
     filter: "(?i)(🇹🇼|🇨🇳|台湾)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png
 
-  - name: 香港节点
+  - name: Hong Kong
     type: select
     include-all-providers: true
     filter: "(?i)(🇭🇰|香港)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png
 
-  - name: 其余节点
+  - name: Other
     type: select
     include-all-providers: true
     filter: "(?i)^(?!.*(?:🇺🇸|🇯🇵|🇸🇬|🇹🇼|🇨🇳|🇭🇰|美国|日本|新加坡|台湾|香港)).*"
@@ -211,28 +211,28 @@ proxy-groups:
   - name: GLOBAL
     type: select
     proxies:
-      - 节点选择
+      - Proxy
       - DIRECT
       - REJECT
-      - 美国节点
-      - 特殊地址
-      - 订阅更新
-      - 广告拦截
+      - US
+      - Special
+      - Update
+      - Ads
       - QUIC
-      - PORN
+      - Porn
       - TikTok
       - Google
-      - 谷歌FCM
-      - 哔哩哔哩
-      - 游戏平台
-      - 微软服务
-      - 苹果服务
-      - 漏网之鱼
-      - 日本节点
-      - 狮城节点
-      - 台湾节点
-      - 香港节点
-      - 其余节点
+      - FCM
+      - Bilibili
+      - Steam
+      - Microsoft
+      - Apple
+      - Final
+      - Japan
+      - Singapore
+      - Taiwan
+      - Hong Kong
+      - Other
 
 rule-anchor:
   classical: &classical
@@ -240,10 +240,10 @@ rule-anchor:
     behavior: classical
     format: text
     interval: 86400
-    proxy: 节点选择
+    proxy: Proxy
     # header: { Authorization: ["__AUTHORIZATION__"] }
-  ip: &ip { type: http, behavior: ipcidr, format: mrs, interval: 86400, proxy: 节点选择 }
-  domain: &domain { type: http, behavior: domain, format: mrs, interval: 86400, proxy: 节点选择 }
+  ip: &ip { type: http, behavior: ipcidr, format: mrs, interval: 86400, proxy: Proxy }
+  domain: &domain { type: http, behavior: domain, format: mrs, interval: 86400, proxy: Proxy }
 
 rule-providers:
   special_address:
@@ -341,27 +341,27 @@ rule-providers:
 
 rules:
   - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((OR,((RULE-SET,cn_domain),(RULE-SET,cn_ip,no-resolve),(RULE-SET,private_domain),(RULE-SET,private_ip,no-resolve),(RULE-SET,custom_direct,no-resolve)))))),QUIC
-  - RULE-SET,special_address,特殊地址,no-resolve
+  - RULE-SET,special_address,Special,no-resolve
   - RULE-SET,custom_direct,DIRECT,no-resolve
-  - RULE-SET,custom_proxy,节点选择,no-resolve
-  - RULE-SET,ads_domain,广告拦截
+  - RULE-SET,custom_proxy,Proxy,no-resolve
+  - RULE-SET,ads_domain,Ads
   - RULE-SET,private_domain,DIRECT
-  - RULE-SET,bilibili_domain,哔哩哔哩
+  - RULE-SET,bilibili_domain,Bilibili
   - RULE-SET,tiktok_domain,TikTok
-  - RULE-SET,steam_domain,游戏平台
-  - RULE-SET,fcm_domain,谷歌FCM
+  - RULE-SET,steam_domain,Steam
+  - RULE-SET,fcm_domain,FCM
   - RULE-SET,google_domain,Google
   - DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com,DIRECT
   - DOMAIN-SUFFIX,windowsupdate.com,DIRECT
-  - RULE-SET,microsoft_domain,微软服务
-  - RULE-SET,apple_domain,苹果服务
-  - RULE-SET,porn_domain,PORN
-  - RULE-SET,geolocation_not_cn,节点选择
+  - RULE-SET,microsoft_domain,Microsoft
+  - RULE-SET,apple_domain,Apple
+  - RULE-SET,porn_domain,Porn
+  - RULE-SET,geolocation_not_cn,Proxy
 
   - RULE-SET,private_ip,DIRECT
-  - RULE-SET,bilibili_ip,哔哩哔哩
+  - RULE-SET,bilibili_ip,Bilibili
   - RULE-SET,google_ip,Google
-  - RULE-SET,apple_ip,苹果服务
+  - RULE-SET,apple_ip,Apple
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
-  - MATCH,漏网之鱼
+  - MATCH,Final
