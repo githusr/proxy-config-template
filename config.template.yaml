@@ -8,15 +8,17 @@ proxy-providers:
   __PROVIDER_NAME__:
     <<: *p
     interval: 86400
-    path: ./proxy_providers/1.yaml
+    path: proxies/1.yaml
     url: "__PROVIDER_URL__"
 
   __ONE_TIME_PROVIDER_NAME__:
     <<: *p
     override:
       additional-suffix: ""
-    path: ./proxy_providers/2.yaml
-    url: "__ONE_TIME_PROVIDER_URL__"
+      override-expr:
+        - '(select(.server == "__ORIGINAL_SERVER__") | .server) = "__MAPPED_SERVER__"'
+    path: proxies/2.yaml
+    url: "__PROVIDER_URL__"
 
 mixed-port: 7890
 ipv6: false
@@ -27,9 +29,9 @@ log-level: silent
 find-process-mode: off
 
 external-controller: 0.0.0.0:9090
-external-ui: WebUI
+external-ui: ui
 external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
-secret: "__YOUR_SECRET__"
+secret: "__SECRET__"
 
 profile:
   store-selected: true
@@ -73,6 +75,7 @@ dns:
   enable: true
   cache-algorithm: arc
   ipv6: false
+  use-hosts: true
   listen: 0.0.0.0:1053
   enhanced-mode: fake-ip
   fake-ip-range: 28.0.0.1/8
@@ -248,95 +251,95 @@ rule-anchor:
 rule-providers:
   special_address:
     <<: *classical
-    path: ./rule_providers/special_address.list
+    path: rules/special_address.list
     url: "__SPECIAL_ADDRESS_URL__"
 
   custom_direct:
     <<: *classical
-    path: ./rule_providers/custom_direct.list
+    path: rules/custom_direct.list
     url: "__CUSTOM_DIRECT_URL__"
   custom_proxy:
     <<: *classical
-    path: ./rule_providers/custom_proxy.list
+    path: rules/custom_proxy.list
     url: "__CUSTOM_PROXY_URL__"
 
   ads_domain:
     <<: *domain
-    path: ./rule_providers/ads_domain.mrs
+    path: rules/external/ads_domain.mrs
     url: https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs
 
   private_domain:
     <<: *domain
-    path: ./rule_providers/private_domain.mrs
+    path: rules/external/private_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
   private_ip:
     <<: *ip
-    path: ./rule_providers/private_ip.mrs
+    path: rules/external/private_ip.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs
 
   bilibili_domain:
     <<: *domain
-    path: ./rule_providers/bilibili_domain.mrs
+    path: rules/external/bilibili_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs
   bilibili_ip:
     <<: *ip
-    path: ./rule_providers/bilibili_ip.mrs
+    path: rules/external/bilibili_ip.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/bilibili.mrs
 
   tiktok_domain:
     <<: *domain
-    path: ./rule_providers/tiktok_domain.mrs
+    path: rules/external/tiktok_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
 
   steam_domain:
     <<: *domain
-    path: ./rule_providers/steam_domain.mrs
+    path: rules/external/steam_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs
 
   fcm_domain:
     <<: *domain
-    path: ./rule_providers/fcm_domain.mrs
+    path: rules/external/fcm_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.mrs
 
   google_domain:
     <<: *domain
-    path: ./rule_providers/google_domain.mrs
+    path: rules/external/google_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
   google_ip:
     <<: *ip
-    path: ./rule_providers/google_ip.mrs
+    path: rules/external/google_ip.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs
 
   microsoft_domain:
     <<: *domain
-    path: ./rule_providers/microsoft_domain.mrs
+    path: rules/external/microsoft_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs
 
   apple_domain:
     <<: *domain
-    path: ./rule_providers/apple_domain.mrs
+    path: rules/external/apple_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs
   apple_ip:
     <<: *ip
-    path: ./rule_providers/apple_ip.mrs
+    path: rules/external/apple_ip.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs
 
   porn_domain:
     <<: *domain
-    path: ./rule_providers/porn_domain.mrs
+    path: rules/external/porn_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-porn.mrs
 
   geolocation_not_cn:
     <<: *domain
-    path: ./rule_providers/geolocation_not_cn.mrs
+    path: rules/external/geolocation_not_cn.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs
   cn_domain:
     <<: *domain
-    path: ./rule_providers/cn_domain.mrs
+    path: rules/external/cn_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
   cn_ip:
     <<: *ip
-    path: ./rule_providers/cn_ip.mrs
+    path: rules/external/cn_ip.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
 
 rules:
