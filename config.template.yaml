@@ -1,24 +1,25 @@
 p: &p
   type: http
+  interval: 86400
   health-check: { enable: true, url: https://www.gstatic.com/generate_204, interval: 1800 }
   proxy: Update
   header: { User-Agent: ["ClashMetaForAndroid/2.11.32.Meta"] }
 
 proxy-providers:
-  __PROVIDER_NAME__:
+  <provider_name>:
     <<: *p
-    interval: 86400
     path: proxies/1.yaml
-    url: "__PROVIDER_URL__"
+    url: <provider_url>
 
-  __ONE_TIME_PROVIDER_NAME__:
+  <one_time_provider_name>:
     <<: *p
+    interval: 0
     override:
       additional-suffix: ""
       override-expr:
-        - '(select(.server == "__ORIGINAL_SERVER__") | .server) = "__MAPPED_SERVER__"'
+        - '(select(.server == "<original_server>") | .server) = "<mapped_server>"'
     path: proxies/2.yaml
-    url: "__PROVIDER_URL__"
+    url: <provider_url>
 
 mixed-port: 7890
 ipv6: false
@@ -31,7 +32,7 @@ find-process-mode: off
 external-controller: 0.0.0.0:9090
 external-ui: ui
 external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
-secret: "__SECRET__"
+secret: <secret>
 
 profile:
   store-selected: true
@@ -103,27 +104,39 @@ dns:
     - https://cloudflare-dns.com/dns-query#Proxy
     - https://dns.google/dns-query#Proxy
 
+proxies:
+
 proxy-groups:
   - name: Proxy
     type: select
-    proxies: [US, Japan, Singapore, Taiwan, Hong Kong, Other, REJECT, DIRECT]
+    proxies: [Exit, US, JP, SG, TW, HK, Other, REJECT, DIRECT]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Rocket.png
+
+  - name: Exit
+    type: select
+    include-all-proxies: true
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Area.png
+
+  - name: Relay
+    type: select
+    proxies: [US, JP, SG, TW, HK, Other]
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Stack.png
 
   - name: US
     type: select
     include-all-providers: true
     filter: "(?i)(🇺🇸|美国)"
+    empty-fallback: REJECT
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png
 
   - name: Special
     type: select
-    proxies: [PASS, DIRECT, REJECT]
-    include-all: true
+    proxies: [PASS, REJECT, US, JP, SG, TW, HK, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Lab.png
 
   - name: Update
     type: select
-    proxies: [Proxy, DIRECT]
+    proxies: [DIRECT, Proxy]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Round_Robin.png
 
   - name: Ads
@@ -136,19 +149,19 @@ proxy-groups:
     proxies: [REJECT, PASS, REJECT-DROP]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ForeignMedia.png
 
-  - name: Porn
+  - name: NSFW
     type: select
-    proxies: [Japan, Taiwan, Hong Kong, Singapore, US, Other, DIRECT]
-    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Pornhub.png
+    proxies: [JP, TW, HK, SG, US, Other, DIRECT]
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Lock.png
 
   - name: TikTok
     type: select
-    proxies: [Proxy, US, Japan, Singapore, Taiwan, Hong Kong, Other, DIRECT]
+    proxies: [Proxy, US, JP, SG, TW, HK, Other, DIRECT]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
 
   - name: Google
     type: select
-    proxies: [Proxy, US, Japan, Singapore, Taiwan, Hong Kong, Other, DIRECT]
+    proxies: [Proxy, US, JP, SG, TW, HK, Other, DIRECT]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png
 
   - name: FCM
@@ -158,48 +171,48 @@ proxy-groups:
 
   - name: Bilibili
     type: select
-    proxies: [DIRECT, Taiwan, Hong Kong]
+    proxies: [DIRECT, TW, HK]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/bilibili.png
 
   - name: Steam
     type: select
-    proxies: [DIRECT, US, Japan, Singapore, Taiwan, Hong Kong, Other]
+    proxies: [DIRECT, US, JP, SG, TW, HK, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png
 
   - name: Microsoft
     type: select
-    proxies: [Proxy, DIRECT, US, Japan, Singapore, Taiwan, Hong Kong, Other]
+    proxies: [Proxy, DIRECT, US, JP, SG, TW, HK, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Microsoft.png
 
   - name: Apple
     type: select
-    proxies: [Proxy, DIRECT, US, Japan, Singapore, Taiwan, Hong Kong, Other]
+    proxies: [Proxy, DIRECT, US, JP, SG, TW, HK, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png
 
   - name: Final
     type: select
-    proxies: [Proxy, DIRECT, US, Japan, Singapore, Taiwan, Hong Kong, Other]
+    proxies: [Proxy, DIRECT, US, JP, SG, TW, HK, Other]
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Final.png
 
-  - name: Japan
+  - name: JP
     type: select
     include-all-providers: true
     filter: "(?i)(🇯🇵|日本)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png
 
-  - name: Singapore
+  - name: SG
     type: select
     include-all-providers: true
     filter: "(?i)(🇸🇬|新加坡)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png
 
-  - name: Taiwan
+  - name: TW
     type: select
     include-all-providers: true
     filter: "(?i)(🇹🇼|🇨🇳|台湾)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png
 
-  - name: Hong Kong
+  - name: HK
     type: select
     include-all-providers: true
     filter: "(?i)(🇭🇰|香港)"
@@ -217,12 +230,14 @@ proxy-groups:
       - Proxy
       - DIRECT
       - REJECT
+      - Exit
+      - Relay
       - US
       - Special
       - Update
       - Ads
       - QUIC
-      - Porn
+      - NSFW
       - TikTok
       - Google
       - FCM
@@ -231,10 +246,10 @@ proxy-groups:
       - Microsoft
       - Apple
       - Final
-      - Japan
-      - Singapore
-      - Taiwan
-      - Hong Kong
+      - JP
+      - SG
+      - TW
+      - HK
       - Other
 
 rule-anchor:
@@ -244,24 +259,24 @@ rule-anchor:
     format: text
     interval: 86400
     proxy: Proxy
-    # header: { Authorization: ["__AUTHORIZATION__"] }
+    # header: { Authorization: [<authorization>] }
   ip: &ip { type: http, behavior: ipcidr, format: mrs, interval: 86400, proxy: Proxy }
   domain: &domain { type: http, behavior: domain, format: mrs, interval: 86400, proxy: Proxy }
 
 rule-providers:
   special_address:
     <<: *classical
-    path: rules/special_address.list
-    url: "__SPECIAL_ADDRESS_URL__"
+    path: rules/special.list
+    url: <special_address_url>
 
   custom_direct:
     <<: *classical
-    path: rules/custom_direct.list
-    url: "__CUSTOM_DIRECT_URL__"
+    path: rules/direct.list
+    url: <custom_direct_url>
   custom_proxy:
     <<: *classical
-    path: rules/custom_proxy.list
-    url: "__CUSTOM_PROXY_URL__"
+    path: rules/proxy.list
+    url: <custom_proxy_url>
 
   ads_domain:
     <<: *domain
@@ -358,7 +373,7 @@ rules:
   - DOMAIN-SUFFIX,windowsupdate.com,DIRECT
   - RULE-SET,microsoft_domain,Microsoft
   - RULE-SET,apple_domain,Apple
-  - RULE-SET,porn_domain,Porn
+  - RULE-SET,porn_domain,NSFW
   - RULE-SET,geolocation_not_cn,Proxy
 
   - RULE-SET,private_ip,DIRECT
