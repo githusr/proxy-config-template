@@ -105,6 +105,19 @@ dns:
     - https://dns.google/dns-query#Proxy
 
 proxies:
+  - name: Exit 1
+    type: vless
+    server: <server>
+    port: 443
+    udp: true
+    dialer-proxy: Relay
+    smux: { enabled: false }
+    tls: false
+    uuid: <uuid>
+    flow: xtls-rprx-vision
+    packet-encoding: xudp
+    encryption: "mlkem768x25519plus.xorpub.0rtt.<x25519_password>"
+    network: tcp
 
 proxy-groups:
   - name: Proxy
