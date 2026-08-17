@@ -3,7 +3,7 @@ p: &p
   interval: 86400
   health-check: { enable: true, url: https://www.gstatic.com/generate_204, interval: 1800 }
   proxy: Update
-  header: { User-Agent: ["ClashMetaForAndroid/2.11.32.Meta"] }
+  header: { User-Agent: ["ClashMetaForAndroid/2.11.33.Meta"] }
 
 proxy-providers:
   <provider_name>:
