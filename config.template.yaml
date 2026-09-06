@@ -128,6 +128,7 @@ proxy-groups:
   - name: Exit
     type: select
     include-all-proxies: true
+    interval: 1800
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Area.png
 
   - name: Relay
