@@ -6,20 +6,20 @@ p: &p
   header: { User-Agent: ["ClashMetaForAndroid/2.11.33.Meta"] }
 
 proxy-providers:
-  <provider_name>:
+  <provider-name>:
     <<: *p
     path: proxies/1.yaml
-    url: <provider_url>
+    url: <provider-url>
 
-  <one_time_provider_name>:
+  <one-time-provider-name>:
     <<: *p
     interval: 0
     override:
       additional-suffix: ""
       override-expr:
-        - '(select(.server == "<original_server>") | .server) = "<mapped_server>"'
+        - '(select(.server == "<original-server>") | .server) = "<mapped-server>"'
     path: proxies/2.yaml
-    url: <provider_url>
+    url: <provider-url>
 
 mixed-port: 7890
 ipv6: false
@@ -116,7 +116,7 @@ proxies:
     uuid: <uuid>
     flow: xtls-rprx-vision
     packet-encoding: xudp
-    encryption: "mlkem768x25519plus.xorpub.0rtt.<x25519_password>"
+    encryption: "mlkem768x25519plus.xorpub.0rtt.<x25519-password>"
     network: tcp
 
 proxy-groups:
@@ -138,7 +138,7 @@ proxy-groups:
   - name: US
     type: select
     include-all-providers: true
-    filter: "(?i)(🇺🇸|美国)"
+    filter: "(?i)(🇺🇸|\u7f8e\u56fd)"
     empty-fallback: REJECT
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png
 
@@ -210,31 +210,31 @@ proxy-groups:
   - name: JP
     type: select
     include-all-providers: true
-    filter: "(?i)(🇯🇵|日本)"
+    filter: "(?i)(🇯🇵|\u65e5\u672c)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png
 
   - name: SG
     type: select
     include-all-providers: true
-    filter: "(?i)(🇸🇬|新加坡)"
+    filter: "(?i)(🇸🇬|\u65b0\u52a0\u5761)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png
 
   - name: TW
     type: select
     include-all-providers: true
-    filter: "(?i)(🇹🇼|🇨🇳|台湾)"
+    filter: "(?i)(🇹🇼|🇨🇳|\u53f0\u6e7e)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png
 
   - name: HK
     type: select
     include-all-providers: true
-    filter: "(?i)(🇭🇰|香港)"
+    filter: "(?i)(🇭🇰|\u9999\u6e2f)"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png
 
   - name: Other
     type: select
     include-all-providers: true
-    filter: "(?i)^(?!.*(?:🇺🇸|🇯🇵|🇸🇬|🇹🇼|🇨🇳|🇭🇰|美国|日本|新加坡|台湾|香港)).*"
+    filter: "(?i)^(?!.*(?:🇺🇸|🇯🇵|🇸🇬|🇹🇼|🇨🇳|🇭🇰|\u7f8e\u56fd|\u65e5\u672c|\u65b0\u52a0\u5761|\u53f0\u6e7e|\u9999\u6e2f)).*"
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png
 
   - name: GLOBAL
@@ -280,16 +280,16 @@ rule-providers:
   special_address:
     <<: *classical
     path: rules/special.list
-    url: <special_address_url>
+    url: <special-address-url>
 
   custom_direct:
     <<: *classical
     path: rules/direct.list
-    url: <custom_direct_url>
+    url: <custom-direct-url>
   custom_proxy:
     <<: *classical
     path: rules/proxy.list
-    url: <custom_proxy_url>
+    url: <custom-proxy-url>
 
   ads_domain:
     <<: *domain
