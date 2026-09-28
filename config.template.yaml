@@ -56,7 +56,8 @@ sniffer:
 
 tun:
   enable: true
-  stack: mixed
+  stack: mips
+  congestion-controller: bbr
   device: Meta
   dns-hijack:
     - any:53
