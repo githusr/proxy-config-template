@@ -100,7 +100,8 @@ dns:
     - https://doh.pub/dns-query
   proxy-server-nameserver-policy:
   nameserver-policy:
-    "rule-set:private_domain,fcm_domain,cn_domain,custom_direct": *direct_dns
+    "rule-set:private_domain": system
+    "rule-set:fcm_domain,cn_domain,custom_direct": *direct_dns
   nameserver:
     - https://cloudflare-dns.com/dns-query#Proxy
     - https://dns.google/dns-query#Proxy
